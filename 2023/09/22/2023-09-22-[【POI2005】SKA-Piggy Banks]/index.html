@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【POI2005】SKA-Piggy Banks | TTR - 幻想岛</title>
+<meta name="description" content="此TTR具有超级牛力">
+
+<link rel="stylesheet" href="/css/y2k.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>💾</text></svg>">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+  <div id="desktop">
+    <header id="top-bar">
+  <div class="start-menu">
+    <a href="/" class="start-button">
+      <span class="start-icon">🖥️</span>
+      <span class="start-text">START</span>
+    </a>
+  </div>
+  <nav class="taskbar-nav">
+    
+      
+        <a href="/" class="taskbar-item ">
+          首页
+        </a>
+      
+        <a href="/archives" class="taskbar-item ">
+          归档
+        </a>
+      
+        <a href="/about" class="taskbar-item ">
+          关于
+        </a>
+      
+    
+  </nav>
+  <div class="tray-clock">
+    <span id="clock-display"></span>
+  </div>
+</header>
+
+<div class="marquee">
+  <marquee behavior="scroll" direction="left" scrollamount="3">
+    🌟 欢迎来到 <strong>TTR - 幻想岛</strong>  ——  此TTR具有超级牛力  🌟
+  </marquee>
+</div>
+
+    
+    <main id="content-area">
+      <div class="window-container">
+        <div class="window" id="main-window">
+          <div class="window-title-bar">
+            <div class="title-text">【POI2005】SKA-Piggy Banks</div>
+            <div class="title-buttons">
+              <span class="win-btn min-btn">_</span>
+              <span class="win-btn max-btn">□</span>
+              <span class="win-btn close-btn">✕</span>
+            </div>
+          </div>
+          <div class="window-body">
+            <article class="post-full">
+  <h1 class="post-title">【POI2005】SKA-Piggy Banks</h1>
+  
+  <div class="post-meta">
+    <span class="meta-date">📅 发表于 2023-09-22 15:21</span>
+    
+      <span class="meta-sep">|</span>
+      <span class="meta-updated">🔄 更新于 2026-06-11</span>
+    
+    <span class="meta-sep">|</span>
+    <span class="meta-cats">
+      
+    </span>
+    <span class="meta-sep">|</span>
+    <span class="meta-tags">
+      
+    </span>
+  </div>
+
+  <div class="post-body">
+    <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3420">原题链接</a></p>
+<p>可以直接使用并查集</p>
+<p>大力把一个门 A 和能打开它的门 B 连边，B 设为 A 的祖先</p>
+<p>那么到最后，会形成许多联通块，只需要砸联通块的大祖先，就能打开归属于它的所有门</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> ull = <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> ldb = <span class="type">long</span> <span class="type">double</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">read</span><span class="params">()</span></span>&#123;ll x=<span class="number">0</span>,y=<span class="number">1</span>;<span class="type">char</span> ch=<span class="built_in">getchar</span>();<span class="keyword">while</span>((ch&lt;<span class="string">&#x27;0&#x27;</span>||ch&gt;<span class="string">&#x27;9&#x27;</span>)&amp;&amp;ch!=EOF)&#123;<span class="keyword">if</span>(ch==<span class="string">&#x27;-&#x27;</span>) y=<span class="number">-1</span>;ch=<span class="built_in">getchar</span>();&#125;<span class="keyword">while</span>(ch&gt;=<span class="string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="string">&#x27;9&#x27;</span>)&#123;x=x*<span class="number">10</span>+(ch^<span class="number">48</span>);	ch=<span class="built_in">getchar</span>();&#125;<span class="keyword">return</span> x*y;&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> Mod = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">long</span> <span class="type">long</span> N = <span class="number">1e6</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">long</span> <span class="type">long</span> M = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> bel[N];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> fa[N];</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> vis[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">fd</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(fa[x]==x) <span class="keyword">return</span> x;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> fa[x]=<span class="built_in">fd</span>(fa[x]);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	n=<span class="built_in">read</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">loop</span>(i,<span class="number">1</span>,n) fa[i]=i, bel[i]=<span class="built_in">read</span>();</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="built_in">loop</span>(i,<span class="number">1</span>,n)&#123;</span><br><span class="line"></span><br><span class="line">		fa[<span class="built_in">fd</span>(i)]=fa[<span class="built_in">fd</span>(bel[i])];</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">loop</span>(i,<span class="number">1</span>,n)&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(!vis[<span class="built_in">fd</span>(i)]) &#123;cnt++,vis[<span class="built_in">fd</span>(i)]=<span class="number">1</span>;&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,cnt);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  </div>
+
+  <!-- Post Navigation -->
+  <div class="post-nav">
+    <div class="post-nav-prev">
+      
+        <a href="/2023/09/22/2023-09-22-%5B%E3%80%90poj1984%E3%80%91Navigation%20Nightmare%5D/" class="y2k-btn small">◀ 【poj1984】Navigation Nightmare</a>
+      
+    </div>
+    <div class="post-nav-next">
+      
+        <a href="/2023/09/21/2023-09-21-%5B%E3%80%90syoj#644%E3%80%91%E7%BD%91%E7%BB%9C%E7%A0%B4%E5%9D%8F%5D/" class="y2k-btn small">【syoj#644】网络破坏 ▶</a>
+      
+    </div>
+  </div>
+</article>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <aside id="sidebar-area">
+  <!-- About Widget -->
+  <div class="window sidebar-widget">
+    <div class="window-title-bar">
+      <div class="title-text">💫 站点信息</div>
+    </div>
+    <div class="window-body widget-body">
+      <div class="about-card">
+        <div class="avatar">
+          <span class="avatar-icon">🐱</span>
+        </div>
+        <p class="site-title">TTR - 幻想岛</p>
+        <p class="site-desc">此TTR具有超级牛力</p>
+        <div class="site-stats">
+          <span>📝 98 篇文章</span>
+          <span>🏷️ 0 标签</span>
+          <span>📂 0 分类</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories Widget -->
+  <div class="window sidebar-widget">
+    <div class="window-title-bar">
+      <div class="title-text">📂 分类</div>
+    </div>
+    <div class="window-body widget-body">
+      
+    </div>
+  </div>
+
+  <!-- Tags Widget -->
+  <div class="window sidebar-widget">
+    <div class="window-title-bar">
+      <div class="title-text">🏷️ 标签云</div>
+    </div>
+    <div class="window-body widget-body">
+      <div class="tag-cloud">
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Archive Widget -->
+  <div class="window sidebar-widget">
+    <div class="window-title-bar">
+      <div class="title-text">📅 归档</div>
+    </div>
+    <div class="window-body widget-body">
+      <div class="archive-list">
+        
+          <a href="/2026/06/11/0000-00-00-%5B%E7%AE%80%E8%BF%B0%E6%9C%AC%E5%91%A8%E5%B9%B2%E7%9A%84%E5%A5%BD%E4%BA%8B%5D/" class="archive-item">
+            <span class="archive-date">2026-06</span>
+            <span class="archive-title">简述本周干的好事</span>
+          </a>
+        
+          <a href="/2026/06/11/0000-00-00-%5B%E6%88%91%E7%9A%842021%E5%B9%B4%E4%B8%8EA%E5%B2%9B%5D/" class="archive-item">
+            <span class="archive-date">2026-06</span>
+            <span class="archive-title">我的2021年与A岛</span>
+          </a>
+        
+          <a href="/2026/06/11/0000-00-00-%5B%E5%AD%A6%E7%AB%9E%E8%B5%9B%E7%9A%84%E5%8E%8B%E5%8A%9B%5D/" class="archive-item">
+            <span class="archive-date">2026-06</span>
+            <span class="archive-title">学竞赛的压力</span>
+          </a>
+        
+          <a href="/2026/06/11/0000-00-00-%5B%E5%85%B3%E4%BA%8E%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82%E4%BC%98%E5%8C%96dp%5D/" class="archive-item">
+            <span class="archive-date">2026-06</span>
+            <span class="archive-title">关于矩阵快速幂优化dp</span>
+          </a>
+        
+          <a href="/2026/06/11/0000-00-00-%5B%E4%B8%89%E5%B9%B4%5D/" class="archive-item">
+            <span class="archive-date">2026-06</span>
+            <span class="archive-title">三年</span>
+          </a>
+        
+          <a href="/2026/06/11/0000-00-00-%5B%E3%80%90CF1888B%E3%80%91Raspberries%5D/" class="archive-item">
+            <span class="archive-date">2026-06</span>
+            <span class="archive-title">【CF1888B】Raspberries</span>
+          </a>
+        
+          <a href="/2026/06/11/0000-00-00-%5Buntitled%5D/" class="archive-item">
+            <span class="archive-date">2026-06</span>
+            <span class="archive-title"></span>
+          </a>
+        
+          <a href="/2023/11/19/2023-11-19-%5B%F0%9F%A6%80%E8%8F%9C%EF%BC%8C%E5%B0%B1%E5%A4%9A%E7%BB%83%F0%9F%A6%80%5D/" class="archive-item">
+            <span class="archive-date">2023-11</span>
+            <span class="archive-title">🦀菜，就多练🦀</span>
+          </a>
+        
+          <a href="/2023/11/15/2023-11-15-%5B%E8%8E%AB%E9%98%9F%E6%B3%A8%E6%84%8F%5D/" class="archive-item">
+            <span class="archive-date">2023-11</span>
+            <span class="archive-title">莫队注意</span>
+          </a>
+        
+          <a href="/2023/11/14/2023-11-14-%5B%E3%80%90%E6%A8%A1%E6%8B%9F%E8%B5%9B%E3%80%91%20B.gene%5D/" class="archive-item">
+            <span class="archive-date">2023-11</span>
+            <span class="archive-title">【模拟赛】 B.gene</span>
+          </a>
+        
+          <a href="/2023/11/12/2023-11-12-%5B%E7%8C%AB%E4%BA%8B%5D/" class="archive-item">
+            <span class="archive-date">2023-11</span>
+            <span class="archive-title">猫事</span>
+          </a>
+        
+          <a href="/2023/11/04/2023-11-04-%5B%E3%80%90HNOI2010%E3%80%91%20%E5%BC%B9%E9%A3%9E%E7%BB%B5%E7%BE%8A%5D/" class="archive-item">
+            <span class="archive-date">2023-11</span>
+            <span class="archive-title">【HNOI2010】 弹飞绵羊</span>
+          </a>
+        
+          <a href="/2023/11/04/2023-11-04-%5B%E3%80%90syoj1920%E3%80%914%20%E5%85%BB%E8%8A%B1%5D/" class="archive-item">
+            <span class="archive-date">2023-11</span>
+            <span class="archive-title">【syoj1920】4 养花</span>
+          </a>
+        
+          <a href="/2023/10/31/2023-10-31-%5B%E5%85%B3%E4%BA%8E%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86%5D/" class="archive-item">
+            <span class="archive-date">2023-10</span>
+            <span class="archive-title">关于树链剖分</span>
+          </a>
+        
+          <a href="/2023/10/27/2023-10-27-%5B%E3%80%90%20AT_joisc2014_h%E3%80%91JOIOJI%5D/" class="archive-item">
+            <span class="archive-date">2023-10</span>
+            <span class="archive-title">【 AT_joisc2014_h】JOIOJI</span>
+          </a>
+        
+          <a href="/2023/10/26/2023-10-26-%5B%E3%80%90CF1888C%E3%80%91You%20Are%20So%20Beautiful%5D/" class="archive-item">
+            <span class="archive-date">2023-10</span>
+            <span class="archive-title">【CF1888C】You Are So Beautiful</span>
+          </a>
+        
+          <a href="/2023/10/25/2023-10-25-%5B%E3%80%90CF1884C%E3%80%91Medium%20Design%5D/" class="archive-item">
+            <span class="archive-date">2023-10</span>
+            <span class="archive-title">【CF1884C】Medium Design</span>
+          </a>
+        
+          <a href="/2023/10/22/2023-10-22-%5BCSP-S2%202023%20%E6%B8%B8%E8%AE%B0%5D/" class="archive-item">
+            <span class="archive-date">2023-10</span>
+            <span class="archive-title">CSP-S2 2023 游记</span>
+          </a>
+        
+          <a href="/2023/10/22/2023-10-22-%5B%E5%BD%93%E4%BD%A0%E5%BC%80%E5%A7%8B%E6%80%9D%E8%80%83%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%5D/" class="archive-item">
+            <span class="archive-date">2023-10</span>
+            <span class="archive-title">当你开始思考的时候，</span>
+          </a>
+        
+          <a href="/2023/10/05/2023-10-05-%5B%E3%80%90P2717%E3%80%91%E5%AF%92%E5%81%87%E4%BD%9C%E4%B8%9A%5D/" class="archive-item">
+            <span class="archive-date">2023-10</span>
+            <span class="archive-title">【P2717】寒假作业</span>
+          </a>
+        
+          <a href="/2023/10/05/2023-10-05-%5B%E3%80%90ZJOI2007%E3%80%91%20%E6%97%B6%E6%80%81%E5%90%8C%E6%AD%A5%5D/" class="archive-item">
+            <span class="archive-date">2023-10</span>
+            <span class="archive-title">【ZJOI2007】 时态同步</span>
+          </a>
+        
+          <a href="/2023/09/25/2023-09-25-%5B%E3%80%90BOI2003%E3%80%91%E5%9B%A2%E4%BC%99%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【BOI2003】团伙</span>
+          </a>
+        
+          <a href="/2023/09/25/2023-09-25-%5B%E3%80%90syoj#1686%E3%80%91%E7%81%BE%E5%90%8E%E9%87%8D%E5%BB%BA%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【syoj#1686】灾后重建</span>
+          </a>
+        
+          <a href="/2023/09/24/2023-09-24-%5B%E3%80%90syoj#1685%E3%80%91%E9%9A%BE%E4%BB%A5%E7%AE%A1%E7%90%86%E7%9A%84%E5%A5%B6%E7%89%9B%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【syoj#1685】难以管理的奶牛</span>
+          </a>
+        
+          <a href="/2023/09/23/2023-09-23-%5B%E3%80%90syoj#1697%E3%80%91%E7%B2%89%E5%88%B7%E5%8C%A0%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【syoj#1697】粉刷匠</span>
+          </a>
+        
+          <a href="/2023/09/22/2023-09-22-%5B%E3%80%90poj1984%E3%80%91Navigation%20Nightmare%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【poj1984】Navigation Nightmare</span>
+          </a>
+        
+          <a href="/2023/09/22/2023-09-22-%5B%E3%80%90POI2005%E3%80%91SKA-Piggy%20Banks%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【POI2005】SKA-Piggy Banks</span>
+          </a>
+        
+          <a href="/2023/09/21/2023-09-21-%5B%E3%80%90syoj#644%E3%80%91%E7%BD%91%E7%BB%9C%E7%A0%B4%E5%9D%8F%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【syoj#644】网络破坏</span>
+          </a>
+        
+          <a href="/2023/09/19/2023-09-19-%5B%E3%80%90HNOI2005%E3%80%91%20%E7%8B%A1%E7%8C%BE%E7%9A%84%E5%95%86%E4%BA%BA%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【HNOI2005】 狡猾的商人</span>
+          </a>
+        
+          <a href="/2023/09/19/2023-09-19-%5B%E3%80%90NOI2002%E3%80%91%E9%93%B6%E6%B2%B3%E8%8B%B1%E9%9B%84%E4%BC%A0%E8%AF%B4%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【NOI2002】银河英雄传说</span>
+          </a>
+        
+          <a href="/2023/09/19/2023-09-19-%5B%E3%80%90SCOI2011%E3%80%91%20%E7%B3%96%E6%9E%9C%EF%BC%88%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%89%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【SCOI2011】 糖果（待补充）</span>
+          </a>
+        
+          <a href="/2023/09/19/2023-09-19-%5B%E6%97%A0%E9%A2%98%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">无题</span>
+          </a>
+        
+          <a href="/2023/09/19/2023-09-19-%5B%E3%80%90USACO%202005%20DEC%E3%80%91%20Layout%20G%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【USACO 2005 DEC】 Layout G</span>
+          </a>
+        
+          <a href="/2023/09/15/2023-09-15-%5B2023%20%E4%BF%A1%E6%81%AF%E7%AB%9E%E8%B5%9B%20%E6%B8%B8%E8%AE%B0%EF%BC%88%E6%9B%B4%E6%96%B0%E4%B8%AD%EF%BC%89%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">2023 信息竞赛 游记（更新中）</span>
+          </a>
+        
+          <a href="/2023/09/13/2023-09-13-%5B%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%20BFS%20%E6%B1%82%E8%A7%A3%2001%20%E8%BE%B9%E6%9D%83%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">双端队列 BFS 求解 01 边权最短路问题</span>
+          </a>
+        
+          <a href="/2023/09/12/2023-09-12-%5B%E3%80%90HNOI2009%E3%80%91%E6%9C%80%E5%B0%8F%E5%9C%88%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【HNOI2009】最小圈</span>
+          </a>
+        
+          <a href="/2023/09/11/2023-09-11-%5B%E3%80%90luoguP1266%E3%80%91%20%E9%80%9F%E5%BA%A6%E9%99%90%E5%88%B6%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【luoguP1266】 速度限制</span>
+          </a>
+        
+          <a href="/2023/09/10/2023-09-10-%5B%E7%9C%8B%E7%9C%8B%E6%96%B0%E7%B4%A2%E5%BC%95%E9%A1%B5%EF%BC%9F%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">看看新索引页？</span>
+          </a>
+        
+          <a href="/2023/09/09/2023-09-09-%5B%E3%80%90USACO09NOV%E3%80%91Job%20Hunt%20S%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【USACO09NOV】Job Hunt S</span>
+          </a>
+        
+          <a href="/2023/09/09/2023-09-09-%5B%E3%80%90CQOI2005%E3%80%91%20%E6%96%B0%E5%B9%B4%E5%A5%BD%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【CQOI2005】 新年好</span>
+          </a>
+        
+          <a href="/2023/09/09/2023-09-09-%5BScarborough%20Fair%E3%80%8C%E6%96%AF%E5%8D%A1%E5%B8%83%E7%BD%97%E9%9B%86%E5%B8%82%E3%80%8D%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">Scarborough Fair「斯卡布罗集市」</span>
+          </a>
+        
+          <a href="/2023/09/08/2023-09-08-%5B%E3%80%90syoj1062%E3%80%91%E5%A5%B6%E7%89%9B%E9%80%83%E8%B7%91%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【syoj1062】奶牛逃跑</span>
+          </a>
+        
+          <a href="/2023/09/08/2023-09-08-%5B%E3%80%90BOI%202002%E3%80%91%E5%8F%8C%E8%B0%83%E8%B7%AF%E5%BE%84%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">【BOI 2002】双调路径</span>
+          </a>
+        
+          <a href="/2023/09/08/2023-09-08-%5B%E3%80%90SHOI2012%E3%80%91%20%E5%9B%9E%E5%AE%B6%E7%9A%84%E8%B7%AF%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title"> 【SHOI2012】 回家的路</span>
+          </a>
+        
+          <a href="/2023/09/02/2023-09-02-%5B%E5%9B%A2%E6%80%BB%E6%94%AF%E7%94%A8%20AE%E7%89%B9%E6%95%88%E4%BD%9C%E5%93%81%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">团总支用 AE特效作品</span>
+          </a>
+        
+          <a href="/2023/09/01/2023-09-01-%5B%E3%80%8C%E5%86%AC%E6%97%A5%E7%9A%84%E5%A4%9C%E6%99%9A%E3%80%8D%5D/" class="archive-item">
+            <span class="archive-date">2023-09</span>
+            <span class="archive-title">「冬日的夜晚」</span>
+          </a>
+        
+          <a href="/2023/08/29/2023-08-29-%5B%E3%80%90Acwing345%E3%80%91%20%E7%89%9B%E7%AB%99%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">【Acwing345】 牛站</span>
+          </a>
+        
+          <a href="/2023/08/29/2023-08-29-%5B%E3%80%90USACO2.4%E3%80%91%20%E7%89%9B%E7%9A%84%E6%97%85%E8%A1%8C%20Cow%20Tours%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">【USACO2.4】 牛的旅行 Cow Tours</span>
+          </a>
+        
+          <a href="/2023/08/29/2023-08-29-%5B%E3%80%90luoguP1613%E3%80%91%20%E8%B7%91%E8%B7%AF%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">【luoguP1613】 跑路</span>
+          </a>
+        
+          <a href="/2023/08/28/2023-08-28-%5B%E3%80%90HDU%201599%E3%80%91%20find%20the%20mincost%20route%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">【HDU 1599】 find the mincost route</span>
+          </a>
+        
+          <a href="/2023/08/28/2023-08-28-%5B%E3%80%90Luogu1119%E3%80%91%20%E7%81%BE%E5%90%8E%E9%87%8D%E5%BB%BA%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">【Luogu1119】 灾后重建</span>
+          </a>
+        
+          <a href="/2023/08/28/2023-08-28-%5B%E3%80%90USACO2009Dec%E3%80%91%20Cow%20Toll%20Paths%20%E8%BF%87%E8%B7%AF%E8%B4%B9%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">【USACO2009Dec】 Cow Toll Paths 过路费</span>
+          </a>
+        
+          <a href="/2023/08/28/2023-08-28-%5B%E3%80%90USACO2007NOV%E3%80%91%20Cow%20Hurdles%20S%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">【USACO2007NOV】 Cow Hurdles S</span>
+          </a>
+        
+          <a href="/2023/08/28/2023-08-28-%5B%E3%80%90USACO08JAN%E3%80%91%20Cow%20Contest%20S%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">【USACO08JAN】 Cow Contest S</span>
+          </a>
+        
+          <a href="/2023/08/25/2023-08-25-%5B%E5%96%9C%E6%AC%A2%E7%9A%84%E5%8D%95%E8%AF%8D%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">喜欢的单词</span>
+          </a>
+        
+          <a href="/2023/08/24/2023-08-24-%5B2023%20%E6%B5%8E%E5%8D%97%E4%B9%8B%E7%A7%8B%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">2023 济南之秋</span>
+          </a>
+        
+          <a href="/2023/08/24/2023-08-24-%5B2023-8-24%20dp%E4%B8%93%E9%A2%98%E9%A2%98%E8%A7%A3%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">2023-8-24 dp专题题解</span>
+          </a>
+        
+          <a href="/2023/08/19/2023-08-19-%5B%E4%BD%BF%E7%94%A8nginx%E4%B8%8Efrp%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%81%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">使用nginx与frp搭建内网穿透服务器！</span>
+          </a>
+        
+          <a href="/2023/08/14/2023-08-14-%5B%E3%81%B5%E3%82%8B%E3%81%95%E3%81%A8%20-%20%E3%80%8C%E6%95%85%E4%B9%A1%E3%80%8D%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title">ふるさと - 「故乡」</span>
+          </a>
+        
+          <a href="/2023/08/14/2023-08-14-%5BLullaby%20-%20%E3%80%8C%E6%91%87%E7%AF%AE%E6%9B%B2%E3%80%8D%5D/" class="archive-item">
+            <span class="archive-date">2023-08</span>
+            <span class="archive-title"> Lullaby  - 「摇篮曲」</span>
+          </a>
+        
+          <a href="/2023/07/28/2023-07-28-%5B%E5%85%B3%E4%BA%8E%E5%B1%80%E5%9F%9F%E7%BD%91%E5%86%85%E4%B8%BB%E6%9C%BA%E7%AA%81%E7%84%B6%E6%97%A0%E6%B3%95%E4%BA%92%E9%80%9A%E7%9A%84%E9%97%AE%E9%A2%98%20%E5%8F%8A%E4%B8%B4%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">关于局域网内主机突然无法互通的问题 及临时解决方案</span>
+          </a>
+        
+          <a href="/2023/07/24/2023-07-24-%5Bwin%20%E6%B6%88%E5%A4%B1%E5%90%8E%E7%9A%84%E5%8F%8C%E7%B3%BB%E7%BB%9F%E4%B8%8B%EF%BC%8C%E4%BF%AE%E5%A4%8D%E5%8F%AA%E8%AF%BB%E7%9A%84%20NTFS%20%E5%88%86%E5%8C%BA%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">win 消失后的双系统下，修复只读的 NTFS 分区</span>
+          </a>
+        
+          <a href="/2023/07/14/2023-07-14-%5B%E5%BD%92%E4%B9%A1%E5%81%B6%E8%AE%B0%202%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">归乡偶记 2</span>
+          </a>
+        
+          <a href="/2023/07/13/2023-07-13-%5B%E5%BD%92%E4%B9%A1%E5%81%B6%E8%AE%B0%201%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">归乡偶记 1</span>
+          </a>
+        
+          <a href="/2023/07/11/2023-07-11-%5B%E5%90%8D%E4%BA%BA%E5%90%8D%E8%A8%80%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">名人名言</span>
+          </a>
+        
+          <a href="/2023/07/10/2023-07-10-%5B%E7%93%B6%E9%A2%88%E6%9C%9F%EF%BC%9F%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">瓶颈期？</span>
+          </a>
+        
+          <a href="/2023/07/10/2023-07-10-%5BP4550%20%E6%94%B6%E9%9B%86%E9%82%AE%E7%A5%A8%20%E4%BB%A5%E5%8F%8A%E6%9F%90%E4%BA%9B%E6%9C%9F%E6%9C%9B%E9%A2%98%E7%9A%84%E9%80%9A%E7%94%A8%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">P4550 收集邮票 以及某些期望题的通用分析方法</span>
+          </a>
+        
+          <a href="/2023/07/10/2023-07-10-%5BP3802%20%E5%B0%8F%E9%AD%94%E5%A5%B4%E5%B8%95%E7%90%AA%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">P3802  小魔奴帕琪</span>
+          </a>
+        
+          <a href="/2023/07/10/2023-07-10-%5BP4316%20%E7%BB%BF%E8%B1%86%E8%9B%99%E7%9A%84%E5%BD%92%E5%AE%BF%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">P4316 绿豆蛙的归宿</span>
+          </a>
+        
+          <a href="/2023/07/10/2023-07-10-%5BP5104%20%E7%BA%A2%E5%8C%85%E5%8F%91%E7%BA%A2%E5%8C%85%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">P5104 红包发红包</span>
+          </a>
+        
+          <a href="/2023/07/09/2023-07-09-%5B%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0TTR%20-%20%E5%B9%BB%E6%83%B3%E5%B2%9B%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">欢迎来到TTR - 幻想岛</span>
+          </a>
+        
+          <a href="/2023/07/06/2023-07-06-%5B2023-07-06%20%E6%8F%92%E6%9D%BF%E6%B3%95%E5%8F%8A%E7%90%83%E7%9B%92%E9%97%AE%E9%A2%98%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">2023-07-06 插板法及球盒问题</span>
+          </a>
+        
+          <a href="/2023/07/05/2023-07-05-%5B2023-07-05%207-5%20B.%E9%9D%9E%E4%B8%A5%E6%A0%BC%E4%B8%8A%E5%8D%87%E5%BA%8F%E5%88%97%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">2023-07-05 7-5 B.非严格上升序列</span>
+          </a>
+        
+          <a href="/2023/07/05/2023-07-05-%5B2023-07-05%20%E3%80%90%E7%B2%BE%E9%80%89%E3%80%91%E7%AC%AC%E4%BA%8C%E9%A2%98%E9%A2%98%E8%A7%A3%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">2023-07-05 【精选】第二题题解</span>
+          </a>
+        
+          <a href="/2023/07/04/2023-07-04-%5B2023-07-04%20%E3%80%90%E7%B2%BE%E9%80%89%E3%80%91P7481%20%E6%A2%A6%E7%8E%B0%E6%97%B6%E5%88%BB%5D/" class="archive-item">
+            <span class="archive-date">2023-07</span>
+            <span class="archive-title">2023-07-04 【精选】P7481 梦现时刻</span>
+          </a>
+        
+          <a href="/2023/06/29/2023-06-29-%5B2023-06-29%20#932.%20%E7%AC%AC%20K%20%E5%B0%8F%20%E4%BB%A5%E5%8F%8A%E6%88%91%E7%A0%81%E5%8A%9B%E9%80%80%E5%8C%96%E7%9A%84%E8%AF%81%E6%8D%AE%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">2023-06-29 #932. 第 K 小 以及我码力退化的证据</span>
+          </a>
+        
+          <a href="/2023/06/29/2023-06-29-%5B2023-06-29%20%E7%94%B5%E6%A3%8D%E5%88%87%E5%89%B2%201%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">2023-06-29 电棍切割 1</span>
+          </a>
+        
+          <a href="/2023/06/29/2023-06-29-%5B2023-06-29%20083615%20%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88%E5%B8%B8%E8%A7%81%E7%AD%96%E7%95%A5%EF%BC%88%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%89%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">2023-06-29 08:36:15 排列组合常见策略（待补充）</span>
+          </a>
+        
+          <a href="/2023/06/27/2023-06-27-%5B2023-06-27%20%E5%86%9C%E5%A4%AB%E4%B8%8E%E7%89%9BB%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">2023-06-27 农夫与牛B</span>
+          </a>
+        
+          <a href="/2023/06/25/2023-06-25-%5B2023-06-25%20%E6%9D%A5%E8%87%AA%E6%84%8F%E5%A4%A7%E5%88%A9%E5%8D%A2%E5%B0%94%E5%B0%BC%E4%BA%9A%E7%9A%84%E4%BA%BA%E5%AE%9A%E7%90%86%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">2023-06-25 来自意大利卢尔尼亚的人定理</span>
+          </a>
+        
+          <a href="/2023/06/24/2023-06-24-%5BTop%2010%20%E6%95%B0%E8%AE%BA%E5%AE%9A%E7%90%86%EF%BC%88%E6%9C%AA%E5%85%AC%E5%BC%80%EF%BC%89%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">Top 10 数论定理（未公开）</span>
+          </a>
+        
+          <a href="/2023/06/20/2023-06-20-%5B2023-06-20%20%E6%88%91%E6%98%AF%E4%BA%91%E5%8D%97%E4%BA%BA%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">2023-06-20 我是云南人</span>
+          </a>
+        
+          <a href="/2023/06/19/2023-06-19-%5B2023-06-19%20N%20%E9%92%B1%E4%B9%B0%20M%20%E9%B8%A1%20%E5%A2%9E%E5%BC%BA%E7%89%88%20%E6%9A%A8%20%5Bpmaru%20overdose%5D%20%E5%8F%91%E7%99%AB%E5%AE%A3%E8%A8%80%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">2023-06-19 N 钱买 M 鸡 增强版 暨 [pmaru overdose] 发癫宣言</span>
+          </a>
+        
+          <a href="/2023/06/09/2023-06-09-%5B%E7%BA%A6%E7%91%9F%E5%A4%AB%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">约瑟夫问题学习笔记</span>
+          </a>
+        
+          <a href="/2023/06/08/2023-06-08-%5B%E5%85%B3%E4%BA%8E#1462.%20%E5%A4%A9%E6%89%8D%20ACM%20%E7%9A%84%E6%AD%A3%E8%A7%A3%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">关于#1462. 天才 ACM 的正解</span>
+          </a>
+        
+          <a href="/2023/06/08/2023-06-08-%5B#771.%20%E7%8C%B4%E5%AD%90%E4%B8%8E%E5%B0%8F%E7%90%83%20%E6%80%9D%E8%B7%AF%E7%9A%84%E8%A1%A5%E5%85%85%E4%B8%8E%E8%AF%B4%E6%98%8E%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">#771. 猴子与小球 思路的补充与说明</span>
+          </a>
+        
+          <a href="/2023/06/08/2023-06-08-%5B#758.%20%E6%BF%80%E5%85%89%E7%82%B8%E5%BC%B9%20&amp;%20P2218%20%E8%A6%86%E7%9B%96%E9%97%AE%E9%A2%98%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">#758. 激光炸弹 &amp;amp;amp; P2218 覆盖问题</span>
+          </a>
+        
+          <a href="/2023/06/07/2023-06-07-%5B#1594.%20N%20%E9%92%B1%E4%B9%B0%20M%20%E9%B8%A1%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">#1594. N 钱买 M 鸡</span>
+          </a>
+        
+          <a href="/2023/06/06/2023-06-06-%5B#768.%20%E5%A5%B6%E7%89%9B%E5%BC%80%E4%BC%9A%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">#768. 奶牛开会</span>
+          </a>
+        
+          <a href="/2023/06/06/2023-06-06-%5B%E9%9D%92%E8%9B%99%E7%9A%84%E7%BA%A6%E4%BC%9A%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">青蛙的约会</span>
+          </a>
+        
+          <a href="/2023/06/05/2023-06-05-%5BCF1777F%20Comfortably%20Numb%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">CF1777F Comfortably Numb</span>
+          </a>
+        
+          <a href="/2023/06/05/2023-06-05-%5B%E5%85%B3%E4%BA%8E%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97%E4%B8%8E%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8%E5%BC%8F%E5%8A%A0%E9%80%9F%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">关于矩阵运算与线性递推式加速</span>
+          </a>
+        
+          <a href="/2023/06/01/2023-06-01-%5BExgcd%E7%9A%84%E5%B8%B8%E7%94%A8%E5%85%AC%E5%BC%8F%E6%95%B4%E7%90%86%5D/" class="archive-item">
+            <span class="archive-date">2023-06</span>
+            <span class="archive-title">Exgcd的常用公式整理</span>
+          </a>
+        
+          <a href="/2023/05/31/2023-05-31-%5BMiller-Rabin%E8%AF%A6%E8%A7%A3%20%E4%B8%8E%20#1560.%20%E7%9B%B8%E9%82%BB%E8%B4%A8%E6%95%B0%5D/" class="archive-item">
+            <span class="archive-date">2023-05</span>
+            <span class="archive-title">Miller-Rabin详解 与 #1560. 相邻质数</span>
+          </a>
+        
+          <a href="/2023/05/28/2023-05-28-%5B%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie%E8%AF%A6%E8%A7%A3%20%E4%B8%8E%20%E6%9C%80%E5%A4%A7%E5%BC%82%E6%88%96%E5%92%8C%5D/" class="archive-item">
+            <span class="archive-date">2023-05</span>
+            <span class="archive-title">可持久化trie详解 与 最大异或和</span>
+          </a>
+        
+          <a href="/2023/05/24/2023-05-24-%5B#1452.%20%E6%9C%80%E5%A4%A7%E6%A0%87%E5%8F%B7%20%E4%BB%A4%E6%88%91%E6%84%9F%E5%88%B0%E8%B4%B9%E8%A7%A3%5D/" class="archive-item">
+            <span class="archive-date">2023-05</span>
+            <span class="archive-title">#1452. 最大标号 令我感到费解</span>
+          </a>
+        
+          <a href="/2023/05/13/2023-05-13-%5B%E5%95%B8%E5%95%B8%E4%B9%902%5D/" class="archive-item">
+            <span class="archive-date">2023-05</span>
+            <span class="archive-title">啸啸乐2</span>
+          </a>
+        
+          <a href="/2023/05/13/2023-05-13-%5B%E6%BC%94%E7%A4%BAKMP%E8%BF%87%E7%A8%8B%5D/" class="archive-item">
+            <span class="archive-date">2023-05</span>
+            <span class="archive-title">演示KMP过程</span>
+          </a>
+        
+      </div>
+    </div>
+  </div>
+</aside>
+
+    <footer id="taskbar-footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="status-item">🖨️ 离线</span>
+      <span class="status-item">🔊 音量: ████████</span>
+    </div>
+    <div class="footer-right">
+      <span>© 2023 <a href="/">TTR - 幻想岛</a></span>
+      <span class="divider">|</span>
+      <span>Powered by <a href="https://hexo.io" target="_blank">Hexo</a></span>
+      <span class="divider">|</span>
+      <span>🕸️ 最好的地方是没去过的地方</span>
+    </div>
+  </div>
+</footer>
+
+<div id="ie-popup" class="popup-overlay" style="display:none">
+  <div class="popup-window">
+    <div class="window-title-bar">
+      <div class="title-text">⚠️ Internet Explorer</div>
+      <span class="win-btn close-btn" onclick="this.closest('.popup-overlay').style.display='none'">✕</span>
+    </div>
+    <div class="popup-body">
+      <p>📡 页面加载完成！</p>
+      <p>在 Netscape Navigator 4.0 中效果最佳</p>
+      <p>建议分辨率: 800×600</p>
+      <button class="y2k-btn" onclick="this.closest('.popup-overlay').style.display='none'">✓ 确定</button>
+    </div>
+  </div>
+</div>
+
+  </div>
+
+  <div class="sparkle-container"></div>
+  
+<script src="/js/y2k.js"></script>
+
+</body>
+</html>
