@@ -10,9 +10,17 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 body {
   font-family: "MS Sans Serif", "Microsoft Sans Serif", "Tahoma", "宋体", sans-serif;
-  background: linear-gradient(135deg, #008080 0%, #004080 30%, #400080 60%, #800080 100%);
+  background: linear-gradient(135deg, #008080 0%, #004080 20%, #400080 50%, #800080 80%, #008080 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
   color: #000;
   min-height: 100vh;
   overflow-x: hidden;
@@ -256,6 +264,9 @@ img:hover { border-color: #FFFF00; }
   font-size: 15px;
   line-height: 1.8;
   color: #222;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 .post-body p { margin: 1em 0; }
 .post-body h2 { 
@@ -276,9 +287,17 @@ img:hover { border-color: #FFFF00; }
   border: 2px inset #808080;
   padding: 12px;
   overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
   font-size: 13px;
   font-family: "Courier New", monospace;
   line-height: 1.5;
+}
+
+.post-body pre::-webkit-scrollbar { height: 10px; }
+.post-body pre::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #E0E0E0, #A0A0A0);
+  border: 2px outset #FFF;
 }
 .post-body code {
   background: #F0F0F0;
@@ -304,6 +323,9 @@ img:hover { border-color: #FFFF00; }
   border-collapse: collapse;
   width: 100%;
   margin: 12px 0;
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
 }
 .post-body th, .post-body td {
   border: 2px solid #808080;
