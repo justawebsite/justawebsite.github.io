@@ -283,8 +283,8 @@ body {
 .widget-list a:hover, .category-list a:hover, .archive-list a:hover { color: #299eef; }
 .widget-list .category-list-count, .widget-list .archive-list-count, .category-list-count, .archive-list-count { color: #7a9db2; font-size: 12px; margin-left: 6px; }
 .category-list-child, .archive-list-child { padding-left: 16px; list-style: none; }
-.widget-body .tagcloud { line-height: 2; }
-.widget-body .tagcloud a { text-decoration: none; }
+.widget-body.tagcloud { line-height: 2; }
+.widget-body.tagcloud a { text-decoration: none; }
 
 /* profile widget */
 .profile { text-align: center; }
