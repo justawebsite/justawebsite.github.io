@@ -137,11 +137,6 @@ body {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(to bottom, rgba(255,255,255,0.30), rgba(255,255,255,0) 34%, rgba(10,50,10,0.08) 85%);
 }
-.banner-cloud { position: absolute; pointer-events: none; }
-.cloud-left  { top: 8px;  left: 14px;  width: 240px; opacity: .95; animation: drift 26s ease-in-out infinite alternate; }
-.cloud-right { top: 26px; right: 10px; width: 420px; opacity: .9;  animation: drift 34s ease-in-out infinite alternate-reverse; }
-.banner-flare { position: absolute; top: 34px; right: 24%; width: 300px; opacity: .9; pointer-events: none; mix-blend-mode: screen; }
-@keyframes drift { from { transform: translateX(0); } to { transform: translateX(38px); } }
 
 .banner-title-wrap {
   position: absolute; left: 0; right: 0; top: 88px;
@@ -378,6 +373,6 @@ body {
 
 /* respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .cloud-left, .cloud-right, .butterfly-a, .butterfly-b,
+  .butterfly-a, .butterfly-b,
   .footer-bubbles .bubble { animation: none; }
 }
