@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- partial('partial/head') %>
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body class="home">
+
+  <!-- 背景装饰层 -->
+  
+  <div class="bg-sky"></div>
+  <div class="bg-grass"></div>
+  
+  
+  <div class="bubbles" id="bubbles"></div>
+  
+
+  <!-- 头部导航 -->
+  <%- partial('partial/header') %>
+
+  <!-- 主内容 -->
+  <main class="main-container">
+    <div class="container">
+      <div class="content-wrapper has-sidebar sidebar-right">
+
+        <!-- 内容区 -->
+        <section class="content-area">
+          
+        </section>
+
+        <!-- 侧边栏 -->
+        
+        <aside class="sidebar-area">
+          <%- partial('partial/sidebar') %>
+        </aside>
+        
+
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <%- partial('partial/footer') %>
+
+  <%- js(url_for('/js/script.js')) %>
+
+</body>
+</html>
