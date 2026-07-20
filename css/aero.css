@@ -1,0 +1,407 @@
+/* ==========================================================
+   Frutiger Aero — a Y2K-era Hexo theme
+   Glossy plastic · blue skies · green grass · water & glass
+   ========================================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --aero-blue: #1583d7;
+  --aero-deep: #0361a3;
+  --aero-sky: #87ceeb;
+  --aero-lime: #8fd400;
+  --aero-green: #5bb318;
+  --text: #1c3a4d;
+  --glass: rgba(255, 255, 255, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.9);
+}
+
+html { min-height: 100%; }
+
+body {
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Myriad Pro", Tahoma, Verdana, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+  /* classic sky → white → grass gradient (always present under the wallpaper) */
+  background: linear-gradient(to bottom, #4fa8e0 0%, #87ceeb 30%, #e0f6ff 62%, #b6e39a 88%, #8fd07a 100%);
+  background-attachment: fixed;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+/* ---- fixed wallpaper + white wash --------------------- */
+.page-bg {
+  position: fixed; inset: 0; z-index: -2;
+  background-size: cover; background-position: center top;
+}
+.page-bg-wash {
+  position: fixed; inset: 0; z-index: -1;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.42) 70%, rgba(224,246,255,0.55));
+}
+
+/* ---- layout shell -------------------------------------- */
+#wrapper { max-width: 1060px; margin: 0 auto; padding: 0 14px; }
+
+#main {
+  margin: 18px auto 26px;
+  padding: 22px;
+  border-radius: 14px;
+}
+#content { float: left; width: 100%; }
+#sidebar { display: none; }
+@media (min-width: 900px) {
+  #content { width: calc(100% - 300px); }
+  #sidebar { display: block; float: right; width: 286px; }
+}
+.clear { clear: both; }
+
+/* ---- Aero glass panels --------------------------------- */
+.aero-glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-top-color: #ffffff;
+  border-radius: 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 22px 28px rgba(255,255,255,0.28),
+    0 12px 30px rgba(9, 68, 112, 0.22);
+  backdrop-filter: blur(14px) saturate(1.35);
+  -webkit-backdrop-filter: blur(14px) saturate(1.35);
+}
+
+.aero-panel {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-top-color: #ffffff;
+  border-radius: 10px;
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    0 6px 16px rgba(9, 68, 112, 0.16);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+/* ---- glossy gel buttons --------------------------------- */
+.aero-btn {
+  display: inline-block;
+  padding: 7px 20px;
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.45);
+  background: linear-gradient(to bottom,
+      #a5ddf9 0%, #73c8f8 42%,
+      #1583d7 50%, #0361a3 51%,
+      #299eef 100%);
+  border: 1px solid #024b7f;
+  border-radius: 999px;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.9),
+    inset 0 14px 14px rgba(255,255,255,0.28),
+    0 3px 6px rgba(0, 45, 80, 0.35);
+  transition: filter .15s ease, transform .05s ease;
+}
+.aero-btn:hover { filter: brightness(1.12) saturate(1.1); text-decoration: none; }
+.aero-btn:active {
+  background: linear-gradient(to bottom, #0361a3 0%, #1583d7 60%, #73c8f8 100%);
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 6px rgba(0, 40, 70, 0.5);
+}
+
+/* green variant */
+.aero-btn.green {
+  background: linear-gradient(to bottom, #d9f79b 0%, #a8e34a 42%, #5bb318 50%, #3d8a06 51%, #7ccf2e 100%);
+  border-color: #2f6604;
+}
+
+/* ==========================================================
+   Banner
+   ========================================================== */
+#banner {
+  position: relative;
+  height: 300px;
+  margin-top: 14px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.85);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 14px 34px rgba(9, 68, 112, 0.30);
+}
+.banner-wallpaper {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center 30%;
+}
+.banner-wallpaper::after {           /* gloss sweep over the hero image */
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.30), rgba(255,255,255,0) 34%, rgba(3,60,100,0.10) 85%);
+}
+.banner-cloud { position: absolute; pointer-events: none; }
+.cloud-left  { top: 8px;  left: 14px;  width: 240px; opacity: .95; animation: drift 26s ease-in-out infinite alternate; }
+.cloud-right { top: 26px; right: 10px; width: 420px; opacity: .9;  animation: drift 34s ease-in-out infinite alternate-reverse; }
+.banner-flare { position: absolute; top: 34px; right: 24%; width: 300px; opacity: .9; pointer-events: none; mix-blend-mode: screen; }
+@keyframes drift { from { transform: translateX(0); } to { transform: translateX(38px); } }
+
+.banner-title-wrap {
+  position: absolute; left: 0; right: 0; top: 88px;
+  text-align: center; z-index: 3;
+}
+.banner-title a {
+  font-size: 54px; font-weight: 700; letter-spacing: 1px;
+  color: #ffffff; text-decoration: none;
+  text-shadow:
+    0 1px 0 #7db9e8, 0 2px 0 #4b96d2,
+    0 3px 0 #2d7abd, 0 4px 0 #1c5f9e,
+    0 6px 2px rgba(0, 40, 80, .45),
+    0 10px 24px rgba(0, 30, 60, .55);
+}
+.banner-subtitle {
+  margin-top: 10px; color: #ffffff; font-size: 16px; font-style: italic;
+  text-shadow: 0 1px 3px rgba(0, 50, 90, 0.7);
+}
+.banner-foreground {
+  position: absolute; left: 0; right: 0; bottom: -2px; height: 98px;
+  background-repeat: repeat-x; background-position: bottom center;
+  background-size: auto 100%;
+  pointer-events: none; z-index: 2;
+}
+
+/* ==========================================================
+   Navigation
+   ========================================================== */
+#main-nav { margin: 14px 0 4px; }
+#main-nav .nav-inner {
+  list-style: none; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+}
+.nav-btn { min-width: 108px; text-align: center; }
+
+/* ==========================================================
+   Posts
+   ========================================================== */
+.post { padding: 0 0 14px; }
+.post-header {
+  padding: 14px 22px 10px;
+  background: linear-gradient(to bottom, rgba(174, 222, 248, 0.85), rgba(255,255,255,0.0));
+  border-bottom: 1px solid rgba(21, 131, 215, 0.18);
+}
+.post-title { font-size: 26px; line-height: 1.25; color: #0d5b96; }
+.post-title a { color: #0d5b96; text-decoration: none; }
+.post-title a:hover { color: #299eef; text-shadow: 0 0 12px rgba(41, 158, 239, .45); }
+.post-meta { margin-top: 6px; font-size: 13px; color: #3e6c86; }
+.post-meta a { color: #1583d7; }
+.post-meta span { margin-right: 14px; }
+
+.post-body { padding: 16px 22px 8px; }
+.post-body img { max-width: 100%; height: auto; border-radius: 8px; }
+.post-body a { color: #0d6cb5; text-decoration: none; border-bottom: 1px dotted #0d6cb5; }
+.post-body a:hover { color: #299eef; }
+.post-body h1, .post-body h2, .post-body h3, .post-body h4 {
+  color: #0d5b96; margin: 18px 0 8px;
+}
+.post-body p, .post-body ul, .post-body ol { margin-bottom: 12px; }
+.post-body ul, .post-body ol { padding-left: 26px; }
+.post-body blockquote {
+  margin: 14px 0; padding: 10px 16px;
+  background: rgba(227, 244, 255, 0.75);
+  border-left: 4px solid #73c8f8;
+  border-radius: 0 8px 8px 0;
+  color: #29566f;
+}
+.post-body code, .post-body kbd {
+  font-family: Consolas, "Courier New", monospace;
+  background: #e8f5ff; border: 1px solid #b9e0f5;
+  padding: 1px 6px; border-radius: 4px; font-size: 13px;
+}
+.post-body pre {
+  margin: 14px 0; padding: 12px 16px; overflow-x: auto;
+  background: linear-gradient(to bottom, #fdfefe, #eaf7ff);
+  border: 1px solid #b9e0f5; border-radius: 8px;
+}
+.post-body pre code { background: none; border: 0; padding: 0; }
+.post-body table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+.post-body th, .post-body td { border: 1px solid #aad4ee; padding: 6px 10px; }
+.post-body th { background: linear-gradient(to bottom, #cdeafa, #a5ddf9); }
+.read-more { margin: 12px 0 4px; }
+
+.post-footer { padding: 0 22px; }
+.post-nav .prev { float: left; max-width: 46%; }
+.post-nav .next { float: right; max-width: 46%; }
+
+/* ==========================================================
+   Pagination
+   ========================================================== */
+.pagination { padding: 12px 18px; text-align: center; }
+.pagination .page-number, .pagination .extend {
+  display: inline-block; margin: 0 3px; padding: 4px 12px;
+  color: #fff; text-decoration: none; text-shadow: 0 -1px 1px rgba(0,0,0,.4);
+  background: linear-gradient(to bottom, #a5ddf9 0%, #1583d7 50%, #0361a3 51%, #299eef 100%);
+  border: 1px solid #024b7f; border-radius: 999px;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.8), 0 2px 4px rgba(0,45,80,.3);
+}
+.pagination .current {
+  background: linear-gradient(to bottom, #d9f79b 0%, #a8e34a 42%, #5bb318 50%, #3d8a06 51%, #7ccf2e 100%);
+  border-color: #2f6604;
+}
+
+/* ==========================================================
+   Archive
+   ========================================================== */
+.archive-list { list-style: none; padding: 12px 20px 16px; }
+.archive-list li {
+  padding: 7px 4px; border-bottom: 1px dashed rgba(21, 131, 215, .25);
+  display: flex; gap: 12px; align-items: baseline;
+}
+.archive-list time { color: #3e6c86; font-size: 13px; font-family: Consolas, monospace; flex-shrink: 0; }
+.archive-list a { color: #0d5b96; text-decoration: none; }
+.archive-list a:hover { color: #299eef; }
+
+/* ==========================================================
+   Sidebar widgets
+   ========================================================== */
+.widget { margin-bottom: 18px; }
+.widget-titlebar {
+  padding: 7px 14px;
+  background: linear-gradient(to bottom, #a5ddf9 0%, #73c8f8 40%, #1583d7 55%, #299eef 100%);
+  border-bottom: 1px solid #024b7f;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.85);
+}
+.widget-title {
+  color: #fff; font-weight: 700; font-size: 14px; letter-spacing: .4px;
+  text-shadow: 0 -1px 1px rgba(0, 40, 70, 0.55);
+}
+.widget-title::before { content: "❖ "; opacity: .85; }
+.widget-body { padding: 12px 14px; }
+
+.widget-list { list-style: none; }
+.widget-list li, .widget-list .category-list-item, .widget-list .archive-list-item,
+.category-list .category-list-item, .archive-list .archive-list-item {
+  padding: 5px 2px; border-bottom: 1px dashed rgba(21, 131, 215, .22);
+}
+.widget-list a, .category-list a, .archive-list a { color: #0d6cb5; text-decoration: none; }
+.widget-list a:hover, .category-list a:hover, .archive-list a:hover { color: #299eef; }
+.widget-list .category-list-count, .widget-list .archive-list-count, .category-list-count, .archive-list-count { color: #7a9db2; font-size: 12px; margin-left: 6px; }
+.category-list-child, .archive-list-child { padding-left: 16px; list-style: none; }
+.widget-body .tagcloud { line-height: 2; }
+.widget-body .tagcloud a { text-decoration: none; }
+
+/* profile widget */
+.profile { text-align: center; }
+.profile-avatar {
+  width: 92px; height: 92px; object-fit: cover; border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px #73c8f8, 0 4px 10px rgba(9, 68, 112, .35);
+}
+.profile-name { margin-top: 8px; font-weight: 700; color: #0d5b96; }
+.profile-bio { font-size: 13px; color: #3e6c86; margin: 4px 0; }
+.profile-loc { font-size: 12px; color: #7a9db2; }
+
+/* userbars */
+.userbars img {
+  display: block; width: 100%; max-width: 350px; height: auto;
+  margin: 0 auto 8px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 40, 80, .4);
+  image-rendering: auto;
+}
+.userbars img:hover { transform: scale(1.03); box-shadow: 0 3px 8px rgba(0, 40, 80, .5); }
+
+/* webring */
+.webring { text-align: center; }
+.webring a {
+  color: #0d6cb5; font-weight: 700; text-decoration: none; letter-spacing: 2px;
+}
+.webring a:hover { color: #299eef; }
+.webring-note { margin-top: 6px; font-size: 12px; color: #3e6c86; }
+
+/* ==========================================================
+   Footer
+   ========================================================== */
+#footer { position: relative; margin-top: 8px; }
+.footer-water {
+  height: 70px; background-repeat: repeat-x; background-position: bottom center;
+  background-size: auto 100%; opacity: .9;
+}
+.footer-grass {
+  height: 46px; background-repeat: repeat-x; background-position: bottom center;
+  background-size: auto 100%;
+}
+.footer-inner {
+  margin: 12px 0 22px; padding: 14px 18px; text-align: center;
+}
+.footer-banners { margin-bottom: 10px; }
+.footer-banners img, .footer-banners a img {
+  width: 350px; max-width: 88%; height: auto;
+  border-radius: 2px; box-shadow: 0 1px 4px rgba(0, 40, 80, .4);
+}
+.footer-meta { font-size: 13px; color: #2c556e; }
+.footer-meta span { margin: 0 10px; display: inline-block; }
+.footer-meta a { color: #0d6cb5; }
+.y2k-counter {
+  font-family: "Courier New", monospace; font-weight: 700; letter-spacing: 3px;
+  background: linear-gradient(to bottom, #0b2c1f, #14532d);
+  color: #7dffa9; padding: 2px 10px; border-radius: 4px;
+  border: 1px solid #0b2c1f; text-shadow: 0 0 6px #38f97e;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,.7);
+}
+.footer-badges { margin-top: 10px; }
+.y2k-badge {
+  display: inline-block; margin: 2px 4px; padding: 2px 10px;
+  font-size: 11px; font-family: Verdana, sans-serif; color: #fff;
+  background: linear-gradient(to bottom, #9e9e9e 0%, #6f6f6f 50%, #4c4c4c 51%, #8a8a8a 100%);
+  border: 1px solid #3d3d3d; border-radius: 3px;
+  text-shadow: 0 -1px 1px rgba(0,0,0,.5);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.6);
+}
+
+/* bubbles rising through the footer */
+.footer-bubbles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.footer-bubbles .bubble { position: absolute; bottom: -90px; opacity: 0; animation: rise 9s linear infinite; }
+.footer-bubbles .b1 { left: 6%;  width: 44px; animation-delay: 0s; }
+.footer-bubbles .b2 { left: 22%; width: 26px; animation-delay: 2.2s; }
+.footer-bubbles .b3 { right: 12%; width: 38px; animation-delay: 4.4s; }
+.footer-bubbles .b4 { right: 30%; width: 22px; animation-delay: 6.1s; }
+@keyframes rise {
+  0%   { transform: translateY(0) scale(1);     opacity: 0; }
+  12%  { opacity: .85; }
+  90%  { opacity: .75; }
+  100% { transform: translateY(-340px) scale(1.15); opacity: 0; }
+}
+
+/* ==========================================================
+   Floating sprites (butterflies)
+   ========================================================== */
+.sprite { position: fixed; z-index: 5; pointer-events: none; }
+.butterfly { width: 74px; filter: drop-shadow(0 4px 5px rgba(0, 40, 80, .3)); }
+.butterfly-a { top: 22%; left: 3%;  animation: flutter-a 17s ease-in-out infinite; }
+.butterfly-b { top: 56%; right: 4%; width: 92px; animation: flutter-b 23s ease-in-out infinite; }
+@keyframes flutter-a {
+  0%, 100% { transform: translate(0, 0) rotate(-6deg); }
+  25% { transform: translate(4vw, -6vh) rotate(8deg); }
+  50% { transform: translate(8vw, 2vh) rotate(-4deg); }
+  75% { transform: translate(3vw, 6vh) rotate(10deg); }
+}
+@keyframes flutter-b {
+  0%, 100% { transform: translate(0, 0) rotate(5deg); }
+  33% { transform: translate(-6vw, -5vh) rotate(-9deg); }
+  66% { transform: translate(-2vw, 7vh) rotate(6deg); }
+}
+
+/* ==========================================================
+   Small screens
+   ========================================================== */
+@media (max-width: 620px) {
+  .banner-title a { font-size: 34px; }
+  #banner { height: 220px; }
+  .banner-title-wrap { top: 66px; }
+  #main { padding: 14px; }
+  .post-body { padding: 12px 14px 6px; }
+  .butterfly { display: none; }
+}
+
+/* respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .cloud-left, .cloud-right, .butterfly-a, .butterfly-b,
+  .footer-bubbles .bubble { animation: none; }
+}
